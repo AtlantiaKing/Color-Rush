@@ -72,5 +72,5 @@ namespace utils
 #pragma region CollisionFunctionality
 
 #pragma endregion CollisionFunctionality
-
+	std::wstring s2ws(const std::string& s);
 }

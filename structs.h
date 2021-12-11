@@ -1,5 +1,7 @@
 #pragma once
 #include <string>
+#include "enums.h"
+#include <vector>
 
 struct Window
 {
@@ -69,5 +71,9 @@ struct Ellipsef
 	float radiusY;
 };
 
-
+struct Point2i
+{
+	int x{};
+	int y{};
+};
 
