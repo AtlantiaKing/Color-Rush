@@ -2,6 +2,8 @@
 After receiving an assignment to make a 2D grid-based game we decided to make an original area-control like game.
 The game is made in a SDL&OpenGL framework provided by our school, Howest.
 
+The game can be played at : https://atlantiaking.itch.io/color-rush
+
 ## Table of contents
 * [Technologies](#Technologies)
 * [Functionalities](#Functionalities)
