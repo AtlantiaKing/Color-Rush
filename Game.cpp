@@ -273,6 +273,12 @@ void InitPlayers()
 
 void InitGrid()
 {
+	if (g_pGrid != nullptr)
+	{
+		delete[] g_pGrid;
+		g_pGrid = nullptr;
+	}
+
 	g_pGrid = new Color[g_GridSize * g_GridSize];
 
 	for (int x{ 0 }; x < g_GridSize; ++x)
@@ -611,7 +617,7 @@ void SetTileColor(const Point2i& tilePosition, const Color& newColor, const Colo
 
 	checkedTiles.push_back(tilePosition);
 
-	Color& currentColor{ g_pGrid[GetGridIndex(tilePosition.x, tilePosition.y)] };
+	const Color& currentColor{ g_pGrid[GetGridIndex(tilePosition.x, tilePosition.y)] };
 
 	if (currentColor == previousColor)
 	{
@@ -657,172 +663,6 @@ bool CheckEndGame()
 	{
 		return true;
 	}
-	//std::vector<Point2i> checkedTiles{};
-	//int amountOfColors{};
-	//Color colorsLeft[2]{};
-	//std::vector<Point2i> tilesColor1{};
-	//std::vector<Point2i> tilesColor2{};
-
-	//for (int x{ 0 }; x < g_GridSize; ++x)
-	//{
-	//	for (int y{ 0 }; y < g_GridSize; ++y)
-	//	{
-	//		if (TilesContainsPosition(checkedTiles, Point2i{ x,y }))
-	//		{
-	//			continue;
-	//		}
-
-	//		Color currentColor{ g_pGrid[GetGridIndex(x,y)] };
-
-	//		if (currentColor == Color::RED || currentColor == Color::BLUE || currentColor == Color::DISABLED)
-	//		{
-	//			continue;
-	//		}
-
-	//		switch (amountOfColors)
-	//		{
-	//		case 0:
-	//			colorsLeft[amountOfColors] = currentColor;
-	//			++amountOfColors;
-
-	//			GetTileOfColor(Point2i{ x,y }, currentColor, checkedTiles, tilesColor1);
-	//			break;
-	//		case 1:
-	//			if (colorsLeft[0] != currentColor)
-	//			{
-	//				colorsLeft[amountOfColors] = currentColor;
-	//				++amountOfColors;
-	//				GetTileOfColor(Point2i{ x,y }, currentColor, checkedTiles, tilesColor2);
-	//			}
-	//			else
-	//			{
-	//				GetTileOfColor(Point2i{ x,y }, currentColor, checkedTiles, tilesColor1);
-	//			}
-	//			break;
-	//		default:
-	//			if (colorsLeft[0] == currentColor)
-	//			{
-	//				GetTileOfColor(Point2i{ x,y }, currentColor, checkedTiles, tilesColor1);
-	//			}
-	//			else if (colorsLeft[1] == currentColor)
-	//			{
-	//				GetTileOfColor(Point2i{ x,y }, currentColor, checkedTiles, tilesColor2);
-	//			}
-	//			else
-	//			{
-	//				return false;
-	//			}
-	//		}
-	//	}
-	//}
-
-	//switch (amountOfColors)
-	//{
-	//case 0:
-	//	return true;
-	//case 1:
-	//	if (tilesColor1.size() == 1)
-	//	{
-	//		if (TilesContainsPosition(g_Players[0].previousSelection, tilesColor1[0]) && TilesContainsPosition(g_Players[1].previousSelection, tilesColor1[0]))
-	//		{
-	//			return true;
-	//		}
-	//		else if (TilesContainsPosition(g_Players[1].previousSelection, tilesColor1[0]) && g_Players[0].currentColor == colorsLeft[0])
-	//		{
-	//			return true;
-	//		}
-	//		else if (TilesContainsPosition(g_Players[0].previousSelection, tilesColor1[0]) && g_Players[1].currentColor == colorsLeft[0])
-	//		{
-	//			return true;
-	//		}
-	//		else if (g_Players[0].currentColor == colorsLeft[0] && g_Players[1].currentColor == colorsLeft[0])
-	//		{
-	//			return true;
-	//		}
-	//		else
-	//		{
-	//			return false;
-	//		}
-	//	}
-	//	else
-	//	{
-	//		if (g_Players[0].currentColor == colorsLeft[0] && g_Players[1].currentColor == colorsLeft[0])
-	//		{
-	//			return true;
-	//		}
-	//		else if (TilesContainsPosition(g_Players[1].previousSelection, tilesColor1[0]) && g_Players[0].currentColor == colorsLeft[0])
-	//		{
-	//			return true;
-	//		}
-	//		else if (TilesContainsPosition(g_Players[0].previousSelection, tilesColor1[0]) && g_Players[1].currentColor == colorsLeft[0])
-	//		{
-	//			return true;
-	//		}
-	//		else if (TilesContainsPosition(g_Players[0].previousSelection, tilesColor1[0]) && TilesContainsPosition(g_Players[1].previousSelection, tilesColor1[0]))
-	//		{
-	//			return true;
-	//		}
-	//		else
-	//		{
-	//			return false;
-	//		}
-	//	}
-	//case 2:
-	//	break;
-	//	/*if (int(tilesColor1.size()) == 1 && 
-	//		g_Players[0].currentColor == colorsLeft[1] &&
-	//		g_Players[1].currentColor == colorsLeft[1] && 
-	//		TilesContainsPosition(g_Players[0].previousSelection, tilesColor1[0]) &&
-	//		TilesContainsPosition(g_Players[1].previousSelection, tilesColor1[0]))
-	//	{
-	//		return true;
-	//	}
-	//	else if (int(tilesColor2.size()) == 1 &&
-	//		g_Players[0].currentColor == colorsLeft[0] &&
-	//		g_Players[1].currentColor == colorsLeft[0] &&
-	//		TilesContainsPosition(g_Players[0].previousSelection, tilesColor2[0]) &&
-	//		TilesContainsPosition(g_Players[1].previousSelection, tilesColor2[0]))
-	//	{
-	//		return true;
-	//	}
-	//	else if (int(tilesColor2.size()) == 1 &&
-	//		int(tilesColor1.size()) == 1 &&
-	//		g_Players[0].currentColor == colorsLeft[0] &&
-	//		g_Players[1].currentColor == colorsLeft[1] &&
-	//		TilesContainsPosition(g_Players[0].previousSelection, tilesColor2[0]) &&
-	//		TilesContainsPosition(g_Players[1].previousSelection, tilesColor1[0]))
-	//	{
-	//		return true;
-	//	}
-	//	else if (int(tilesColor2.size()) == 1 &&
-	//		int(tilesColor1.size()) == 1 &&
-	//		g_Players[0].currentColor == colorsLeft[1] &&
-	//		g_Players[1].currentColor == colorsLeft[0] &&
-	//		TilesContainsPosition(g_Players[0].previousSelection, tilesColor1[0]) &&
-	//		TilesContainsPosition(g_Players[1].previousSelection, tilesColor2[0]))
-	//	{
-	//		return true;
-	//	}
-	//	else if (g_Players[0].currentColor == colorsLeft[0] &&
-	//		g_Players[1	].currentColor == colorsLeft[0] &&
-	//		int(g_Players[0].previousSelection.size()) > 0 && 
-	//		int(g_Players[1].previousSelection.size()) > 0 &&
-	//		TilesContainsPosition(g_Players[0].previousSelection, tilesColor1[1]) &&
-	//		TilesContainsPosition(g_Players[1].previousSelection, tilesColor2[1]))
-	//	{
-	//		return true;
-	//	}
-	//	else if (g_Players[0].currentColor == colorsLeft[1] &&
-	//		g_Players[0].currentColor == colorsLeft[1] &&
-	//		int(g_Players[0].previousSelection.size()) > 0 &&
-	//		int(g_Players[1].previousSelection.size()) > 0 &&
-	//		TilesContainsPosition(g_Players[0].previousSelection, tilesColor1[0]) &&
-	//		TilesContainsPosition(g_Players[1].previousSelection, tilesColor2[0]))
-	//	{
-	//		return true;
-	//	}*/
-	//}
-	//return false;
 }
 
 bool CanPlayerSelect(const Player& player)
