@@ -24,4 +24,3 @@ The game can be played at : https://atlantiaking.itch.io/color-rush
 
 ## Credits
 - All framework files are by SDL, Open GL and our school, Howest.
-- We do NOT own the rights of Fireboy and Watergirl, this is merily a parody.
